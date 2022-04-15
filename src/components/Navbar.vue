@@ -1,7 +1,8 @@
 <template>
   <div class="navbar">
     <nav>
-      <router-link to="/"><span class="icon"><i class="fas fa-home"></i></span>主页</router-link>
+      <router-link to="/">主页</router-link>
+      <router-link to="search">搜索</router-link>
     </nav>
   </div>
 </template>

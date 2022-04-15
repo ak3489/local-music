@@ -1,5 +1,5 @@
 <template>
-  <div class="type-block">
+  <div class="container type-block">
     <div class="til" v-if="title">
       <router-link :to="{ name: 'ListType', params: { ListType: title } }"
         >{{ title }}</router-link
@@ -59,7 +59,7 @@ export default {
   },
   methods: {
     async getSingerList() {
-      let {code,data,msg} = await this.$request.singerList({limit:this.limit});
+      let {code,data,msg} = await this.$request.singerList({pageNo:0,pageSize:this.limit});
       this.dataList = data
       console.log('this.dataList',this.dataList);
     },

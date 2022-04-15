@@ -13,6 +13,8 @@ export default {
 
     singerList: (params) => request.GET('/music/singerList', params),
     singerPage: (params) => request.GET('/music/singerPage', params),
+
+    songList: (params) => request.GET('/music/songList', params),
     // add: (params) => request.POST('/user', params),
     // update: (id, params) => request.PUT(`/user/${id}`, params),
     // delete: (id) => request.DELETE(`/user/${id}`),

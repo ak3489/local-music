@@ -67,7 +67,7 @@ a {
   text-decoration: none;
   cursor: pointer;
   &:hover {
-    text-decoration: underline;
+    text-decoration: none;
   }
 }
 
@@ -101,4 +101,15 @@ a {
 
 .user-select-none {
   user-select: none;
+}
+
+.plyr-wrap {
+  height: 60px;
+
+  .plyr-inner {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
 }

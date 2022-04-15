@@ -1,5 +1,5 @@
 <template>
-  <div class="type-block">
+  <div class="container type-block">
     <div class="til" v-if="title">
       <router-link :to="{ name: 'ListType', params: { ListType: title } }"
         >{{ title }}</router-link
@@ -24,7 +24,7 @@
         <router-link
           class="listimg"
           target="_blank"
-          :to="{ name: 'albumList', params: { ListType: title,id: item.id } }"
+          :to="{ name: 'albumPage', params: { ListType: title,id: item.id } }"
         >
           <img v-bind:src="item.album_pic | randomBookcover(true)" />
           <span v-if="item.bookLength" class="total-chapter"
@@ -34,7 +34,7 @@
         <router-link
           class="bookname"
           target="_blank"
-          :to="{ name: 'albumList', params: { ListType: title,id: item.id } }"
+          :to="{ name: 'albumPage', params: { ListType: title,id: item.id } }"
           >{{ item.album_name }}</router-link
         >
       </li>

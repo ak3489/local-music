@@ -18,14 +18,19 @@ export default new Router({
       component: resolve => require(['@/views/ListType'], resolve)
     },
     {
-      path: '/albumList/:id',
-      name: 'albumList',
-      component: resolve => require(['@/views/albumList'], resolve)
+      path: '/albumPage/:id',
+      name: 'albumPage',
+      component: resolve => require(['@/views/albumPage'], resolve)
     },
     {
       path: '/singerPage/:id',
       name: 'singerPage',
       component: resolve => require(['@/views/singerPage'], resolve)
+    },
+    {
+      path: '/search',
+      name: 'search',
+      component: resolve => require(['@/views/search'], resolve)
     },
   ]
 })

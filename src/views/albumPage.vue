@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="container">
     <section class="columns">
       <div class="column is-one-quarter">
           <img v-bind:src="albumInfo.album_pic | randomBookcover(true)" />
