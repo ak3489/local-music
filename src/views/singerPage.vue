@@ -13,8 +13,8 @@
     </section>
     <section class="song-list block">
         <div class="title is-4">最新歌曲</div>
-        <div class="columns" :class="{playing:index==playIndex}" @click="songClick(item,index)" v-for="(item,index) in songInfo" :key="item.id">
-            <div class="column  is-one-quarter">
+        <div class="columns" >
+            <div class="column is-one-quarter" :class="{playing:index==playIndex}" @click="songClick(item,index)" v-for="(item,index) in songInfo" :key="item.id">
                   <img class="song-icon" :src="item.song_pic||require('../assets/img/song.svg')" alt="">
                   {{item.title}}
             </div>
@@ -23,7 +23,7 @@
     <section class="album-list block">
        <div class="title is-4">歌手专辑</div>
        <div class="columns">
-            <div class="column is-one-quarter" @click="$router.push({ name:'albumList', params:{id: item.id} })" v-for="item in albumInfo" :key="item.id">
+            <div class="column is-one-quarter" @click="$router.push({ name:'albumPage', params:{id: item.id} })" v-for="item in albumInfo" :key="item.id">
                 <img class="song-icon" :src="item.album_pic | randomBookcover(true)" alt="">
                 <div class="">{{item.album_name}}</div>
             </div>

@@ -21,3 +21,39 @@
         height: 100%;
     }
 }
+.search-result {
+    .column {
+        position: relative;
+
+        .play-btn {
+            position: absolute;
+            width: 5rem;
+            height: 5rem;
+            left: calc(50% - 2.5rem);
+            top: calc(50% - 2.5rem);
+            // transform: translateX(-50%);
+            // transform: translateY(-50%);
+            color: #fff;
+            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(8px);
+            background: hsla(0, 0%, 100%, .14);
+            border: 1px solid hsla(0, 0%, 100%, .08);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: .2s;
+            display: none;
+            align-items: center;
+            justify-content: center;
+
+            &:hover {
+                background: hsla(0, 0%, 100%, .28);
+            }
+        }
+
+        &:hover .play-btn {
+            display: flex;
+        }
+    }
+
+
+}

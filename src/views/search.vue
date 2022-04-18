@@ -19,9 +19,14 @@
         <!-- 歌曲列表 -->
         <div class="search-result" v-if="searchTypeIndex==0">
             <div class="columns is-flex-wrap-wrap">
-                <div class="column is-one-quarter" v-for="(item) in songList" :key="item.id" @click="playSong(item)">
+                <div class="column is-one-quarter" v-for="(item) in songList" :key="item.id">
                   <img :src="item.song_pic | randomBookcover(true)" alt="" srcset="">
                   <div>{{item.title}}</div>
+                  <div class="play-btn" @click="playSong(item)">
+                    <svg t="1650260760385" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2571" width="128" height="128">
+                      <path d="M870.2 466.333333l-618.666667-373.28a53.333333 53.333333 0 0 0-80.866666 45.666667v746.56a53.206667 53.206667 0 0 0 80.886666 45.666667l618.666667-373.28a53.333333 53.333333 0 0 0 0-91.333334z" fill="#fff" p-id="2572"></path>
+                    </svg>
+                  </div>
                 </div>
             </div>
         </div>
