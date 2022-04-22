@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import '@/assets/css/global.scss';
+import '@/assets/css/bulma.min.css';
 
 import request from './utils/request.js';
 Vue.prototype.$request = request
