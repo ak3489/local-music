@@ -52,7 +52,7 @@
         </div>
         <!-- 歌手列表 -->
         <!-- https://github.com/vue-bulma/pagination -->
-        <pagination :urlPrefix="'/'" :currentPage="2" :lastPage="100" />
+        <pagination :urlPrefix="'/search'" :urlBuilder="urlBuilder" :currentPage="currentPage" :lastPage="100" />
         <Empty v-if="albumList.length<=0&&songList.length<=0&&singerList.length<=0" description="没有数据" />
     </section>
     <section class="plyr-wrap">
@@ -99,10 +99,12 @@ export default {
             pageNum: 1,
             pageSize: 10,
         },
+        currentPage:1,
     };
   },
   created() {
     this.getSongList()
+    this.currentPage = 1
   },
   methods: {
     async getAlbumList() {
@@ -147,6 +149,10 @@ export default {
         this.$refs.plyr.player.stop();
         this.$refs.plyr.player.play();
       })
+    },
+    urlBuilder (page) {
+      console.log('urlBuilder',page);
+      return { query: { ...this.$route.query, page } } // Changing page in location query
     }
   },
 };
