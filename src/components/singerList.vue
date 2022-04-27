@@ -62,7 +62,7 @@ export default {
   },
   methods: {
     async getSingerList() {
-      let {code,data,msg} = await this.$request.singerList({pageNo:0,pageSize:this.limit});
+      let {code,data,msg} = await this.$request.singerList({pageNo:1,pageSize:this.limit});
       this.dataList = data.list
       console.log('this.dataList',this.dataList);
     },
