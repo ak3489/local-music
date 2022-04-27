@@ -1,7 +1,10 @@
+<!--
+ * @LastEditors: gcz
+-->
 <template>
   <div>
-    <ListBlock class="block" title="专辑列表" type="album" limit="4"></ListBlock>
-    <SingerList  class="block" title="歌手列表" type="singer" limit="4"></SingerList>
+    <ListBlock class="block" title="专辑列表" type="album" limit="5"></ListBlock>
+    <SingerList  class="block" title="歌手列表" type="singer" limit="5"></SingerList>
   </div>
 </template>
 

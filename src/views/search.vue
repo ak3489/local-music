@@ -21,7 +21,7 @@
             <div class="columns is-flex-wrap-wrap">
                 <div class="column is-one-quarter" v-for="(item) in songList" :key="item.id">
                   <img :src="item.song_pic | randomBookcover(true)" alt="" srcset="">
-                  <div>{{item.title}}</div>
+                  <div class="title-line-one">{{item.title}}</div>
                   <div class="play-btn" @click="playSong(item)">
                     <svg t="1650260760385" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2571" width="128" height="128">
                       <path d="M870.2 466.333333l-618.666667-373.28a53.333333 53.333333 0 0 0-80.866666 45.666667v746.56a53.206667 53.206667 0 0 0 80.886666 45.666667l618.666667-373.28a53.333333 53.333333 0 0 0 0-91.333334z" fill="#fff" p-id="2572"></path>
@@ -51,8 +51,10 @@
             </div>
         </div>
         <!-- 歌手列表 -->
-        <!-- https://github.com/vue-bulma/pagination -->
-        <pagination :urlPrefix="'/search'" :urlBuilder="urlBuilder" :currentPage="currentPage" :lastPage="100" />
+        <div class="box pagination-box">
+           <pagination :continues="5" :pageSize="queryParams.pageSize" :total="total" @onChangePage="changePage($event)" />
+        </div>
+       
         <Empty v-if="albumList.length<=0&&songList.length<=0&&singerList.length<=0" description="没有数据" />
     </section>
     <section class="plyr-wrap">
@@ -95,9 +97,11 @@ export default {
         albumList:[],
         songList:[],
         singerList:[],
+        totalPage:1,
+        total:125,
         queryParams: {
-            pageNum: 1,
-            pageSize: 10,
+            pageNo: 1,
+            pageSize: 12,
         },
         currentPage:1,
     };
@@ -108,19 +112,23 @@ export default {
   },
   methods: {
     async getAlbumList() {
-        let {code,data,msg} = await this.$request.albumList({keyword:this.keyword,pageNo:0,pageSize:this.queryParams.pageSize});
-        this.albumList = data
-        console.log('this.albumList',this.albumList);
+        let {code,data,msg} = await this.$request.albumList({keyword:this.keyword,pageNo:this.queryParams.pageNo,pageSize:this.queryParams.pageSize});
+        this.albumList = data.list;
+        this.total = data.total;
+        // console.log('this.albumList',this.albumList);
     },
     async getSongList() {
-        let {code,data,msg} = await this.$request.songList({keyword:this.keyword,pageNo:0,pageSize:this.queryParams.pageSize});
-        this.songList = data
-        console.log('this.songList',this.songList);
+        let {code,data,msg} = await this.$request.songList({keyword:this.keyword,pageNo:this.queryParams.pageNo,pageSize:this.queryParams.pageSize});
+        this.songList = data.list;
+        this.total = data.total;
+        this.totalPage = data.totalPage;
+        // console.log('this.songList',this.songList);
     },
     async getSingerList() {
-        let {code,data,msg} = await this.$request.singerList({keyword:this.keyword,pageNo:0,pageSize:this.queryParams.pageSize});
-        this.singerList = data
-        console.log('this.singerList',this.singerList);
+        let {code,data,msg} = await this.$request.singerList({keyword:this.keyword,pageNo:this.queryParams.pageNo,pageSize:this.queryParams.pageSize});
+        this.singerList = data.list;
+        this.total = data.total;
+        // console.log('this.singerList',this.singerList);
     },
     doSearch(){
         switch (this.searchTypeIndex) {
@@ -139,10 +147,11 @@ export default {
         }
     },
     typeClick(index){
-      this.searchTypeIndex = index
+      this.searchTypeIndex = index;
+      this.doSearch()
     },
     playSong(item){
-      this.audioSrc = `${process.env.BASEAPI}/${item.fPath.replace(/\\/g, "/").substring(7)}`;
+      this.audioSrc = `${process.env.BASEURL}/${item.fPath.replace(/\\/g, "/").substring(7)}`;
       this.$nextTick(()=>{
         this.$refs.audio.src = this.audioSrc;
         // console.log('this.$refs.plyr',this.$refs.plyr);
@@ -150,9 +159,10 @@ export default {
         this.$refs.plyr.player.play();
       })
     },
-    urlBuilder (page) {
-      console.log('urlBuilder',page);
-      return { query: { ...this.$route.query, page } } // Changing page in location query
+    changePage ($event) {
+      console.log('changePage',$event);      
+      this.queryParams.pageNo = $event;
+      this.getSongList();
     }
   },
 };

@@ -113,3 +113,17 @@ a {
     bottom: 0;
   }
 }
+.pagination-box {
+  margin-top: 24px;
+
+  .pagination {
+    width: 50%;
+    margin: 0 auto;
+  }
+}
+
+.title-line-one {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

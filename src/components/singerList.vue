@@ -1,3 +1,6 @@
+<!--
+ * @LastEditors: gcz
+-->
 <template>
   <div class="container type-block">
     <div class="til" v-if="title">
@@ -60,7 +63,7 @@ export default {
   methods: {
     async getSingerList() {
       let {code,data,msg} = await this.$request.singerList({pageNo:0,pageSize:this.limit});
-      this.dataList = data
+      this.dataList = data.list
       console.log('this.dataList',this.dataList);
     },
   },

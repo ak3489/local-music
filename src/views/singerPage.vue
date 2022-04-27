@@ -16,7 +16,7 @@
         <div class="columns" >
             <div class="column is-one-quarter" :class="{playing:index==playIndex}" @click="songClick(item,index)" v-for="(item,index) in songInfo" :key="item.id">
                   <img class="song-icon" :src="item.song_pic||require('../assets/img/song.svg')" alt="">
-                  {{item.title}}
+                  <div class="title-line-one">{{item.title}}</div>
             </div>
         </div>
     </section>
@@ -92,7 +92,7 @@ export default {
     songClick(item,index){
       console.log('item',item);
       this.playIndex = index;
-      this.audioSrc = `${process.env.BASEAPI}/${item.fpath.replace(/\\/g, "/").substring(7)}`;
+      this.audioSrc = `${process.env.BASEURL}/${item.fpath.replace(/\\/g, "/").substring(7)}`;
       this.$nextTick(()=>{
         this.$refs.plyr.player.play();
       })

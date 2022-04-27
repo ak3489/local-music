@@ -13,10 +13,10 @@
       </div>
     </section>
     <section class="song-list">
-        <div class="columns">
+        <div class="columns is-flex-wrap-wrap">
             <div class="column is-one-quarter" :class="{playing:index==playIndex}"  @click="songClick(item,index)" v-for="(item,index) in list" :key="item.id">
                 <img class="song-icon" :src="item.song_pic||require('../assets/img/song.svg')" alt="">
-                {{item.title}}
+                <div class="title-line-one">{{item.title}}</div>
                 <div class="column is-centered">{{item.track_number}}</div>
             </div>
         </div>
@@ -95,7 +95,7 @@ export default {
             console.log('列表播放完了');
           }else{
             this.playIndex = index+1;
-            this.audioSrc = `${process.env.BASEAPI}/${this.list[this.playIndex].fpath.replace(/\\/g, "/").substring(7)}`;
+            this.audioSrc = `${process.env.BASEURL}/${this.list[this.playIndex].fpath.replace(/\\/g, "/").substring(7)}`;
             this.$refs.audio.src = this.audioSrc;
             this.$refs.plyr.player.play();
             console.log('this.audioSrc',this.audioSrc);
@@ -105,7 +105,7 @@ export default {
     songClick(item,index){
       // console.log('item',item);
       this.playIndex = index;
-      this.audioSrc = `${process.env.BASEAPI}/${this.list[this.playIndex].fpath.replace(/\\/g, "/").substring(7)}`;
+      this.audioSrc = `${process.env.BASEURL}/${this.list[this.playIndex].fpath.replace(/\\/g, "/").substring(7)}`;
       this.$nextTick(()=>{
         // console.log(' this.$refs.plyr', this.$refs.plyr.player.eventListeners);
        this.goPlay(index)
@@ -114,7 +114,7 @@ export default {
     },
     playAll(){
       this.playIndex = 0;
-      this.audioSrc = `${process.env.BASEAPI}/${this.list[this.playIndex].fpath.replace(/\\/g, "/").substring(7)}`;
+      this.audioSrc = `${process.env.BASEURL}/${this.list[this.playIndex].fpath.replace(/\\/g, "/").substring(7)}`;
       this.$nextTick(()=>{
         this.goPlay(this.playIndex)
       })
