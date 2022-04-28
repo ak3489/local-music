@@ -139,7 +139,7 @@ export default {
 .total-text {
     margin-right: 16px;
 }
-button {
+.pagination button {
     width: 32px;
     height: 32px;
     font-size: 16px;
