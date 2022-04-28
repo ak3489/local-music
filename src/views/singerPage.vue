@@ -22,7 +22,7 @@
     </section>
     <section class="album-list block">
        <div class="title is-4">歌手专辑</div>
-       <div class="columns">
+       <div class="columns is-flex-wrap-wrap">
             <div class="column is-one-quarter" @click="$router.push({ name:'albumPage', params:{id: item.id} })" v-for="item in albumInfo" :key="item.id">
                 <img class="song-icon" :src="item.album_pic | randomBookcover(true)" alt="">
                 <div class="">{{item.album_name}}</div>

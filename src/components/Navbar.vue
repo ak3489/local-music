@@ -1,8 +1,13 @@
+<!--
+ * @LastEditors: gcz
+-->
 <template>
-  <div class="navbar">
-    <nav>
-      <router-link to="/">主页</router-link>
-      <router-link to="/search">搜索</router-link>
+  <div class="navbar-box">
+    <nav class="container">
+      <div class="left">
+        <router-link :class="$route.path == '/' ? 'actived':''" to="/">主页</router-link>
+        <router-link :class="$route.path == '/search' ? 'actived':''" to="/search">搜索</router-link>
+      </div>
     </nav>
   </div>
 </template>
@@ -33,178 +38,27 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.navbar {
+.navbar-box{
   position: sticky;
-  top: 0;
-  right: 0;
+  box-shadow: 0 .5em 1em -.125em rgba(10,10,10,.1),0 0 0 1px rgba(10,10,10,.02);
+  background: rgba(255,255,255,.9);
+  margin-bottom: 1.2rem;
   left: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 64px;
-  padding: {
-    right: 10vw;
-    left: 10vw;
-  }
-  backdrop-filter: saturate(180%) blur(20px);
-
-  background-color: var(--color-navbar-bg);
-  z-index: 30;
-  -webkit-app-region: drag;
-}
-
-@media (max-width: 1336px) {
-  nav {
-    padding: 0 5vw;
-  }
-}
-
-@supports (-moz-appearance: none) {
-  nav {
-    background-color: var(--color-body-bg);
-  }
-}
-
-nav.has-custom-titlebar {
-  padding-top: 20px;
-  -webkit-app-region: no-drag;
-}
-
-.navigation-buttons {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  .svg-icon {
-    height: 24px;
-    width: 24px;
-  }
-  button {
-    -webkit-app-region: no-drag;
-  }
-}
-@media (max-width: 970px) {
-  .navigation-buttons {
-    flex: unset;
-  }
-}
-
-.navigation-links {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  text-transform: uppercase;
-  user-select: none;
-  a {
-    -webkit-app-region: no-drag;
-    font-size: 18px;
-    font-weight: 700;
-    text-decoration: none;
-    border-radius: 6px;
-    padding: 6px 10px;
-    color: var(--color-text);
-    transition: 0.2s;
-    -webkit-user-drag: none;
-    margin: {
-      right: 12px;
-      left: 12px;
-    }
-    &:hover {
-      background: var(--color-secondary-bg-for-transparent);
-    }
-    &:active {
-      transform: scale(0.92);
-      transition: 0.2s;
-    }
-  }
-  a.active {
-    color: var(--color-primary);
-  }
-}
-
-.search {
-  .svg-icon {
-    height: 18px;
-    width: 18px;
-  }
-}
-
-.search-box {
-  display: flex;
-  justify-content: flex-end;
-  -webkit-app-region: no-drag;
-
-  .container {
+  right: 0;
+  top: 0;
+  z-index: 90;
+  .left{
     display: flex;
-    align-items: center;
-    height: 32px;
-    background: var(--color-secondary-bg-for-transparent);
-    border-radius: 8px;
-    width: 200px;
-  }
-
-  .svg-icon {
-    height: 15px;
-    width: 15px;
-    color: var(--color-text);
-    opacity: 0.28;
-    margin: {
-      left: 8px;
-      right: 4px;
-    }
-  }
-
-  input {
-    font-size: 16px;
-    border: none;
-    background: transparent;
-    width: 96%;
-    font-weight: 600;
-    margin-top: -1px;
-    color: var(--color-text);
-  }
-
-  .active {
-    background: var(--color-primary-bg-for-transparent);
-    input,
-    .svg-icon {
-      opacity: 1;
-      color: var(--color-primary);
-    }
-  }
-}
-
-[data-theme='dark'] {
-  .search-box {
-    .active {
-      input,
-      .svg-icon {
-        color: var(--color-text);
+    a{
+      color: #909399;
+      display: block;
+      padding: 1.5rem 1rem;
+      &.actived{
+        color: #333;
+        border-bottom: 1px solid #f80;
       }
     }
   }
-}
-
-.right-part {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  .avatar {
-    user-select: none;
-    height: 30px;
-    margin-left: 12px;
-    vertical-align: -7px;
-    border-radius: 50%;
-    cursor: pointer;
-    -webkit-app-region: no-drag;
-    -webkit-user-drag: none;
-    &:hover {
-      filter: brightness(80%);
-    }
-  }
-  .search-button {
-    display: none;
-    -webkit-app-region: no-drag;
-  }
+  
 }
 </style>
