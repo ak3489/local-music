@@ -1,5 +1,5 @@
 <template>
-  <div class="pagination">
+  <div class="pagination my-pagination">
     <span class="total-text">共{{ total }}条数据</span>
     <button type="button" class="arrow" :class="{'disbled': currentPage == 1}" :disabled="currentPage == 1" @click="onLastPage">
       <svg
@@ -131,15 +131,15 @@ export default {
 };
 </script>
 
-<style>
-.pagination {
+<style lang='scss' scoped>
+.my-pagination.pagination {
     display: flex;
     align-items: center;
 }
-.total-text {
+.my-pagination .total-text {
     margin-right: 16px;
 }
-.pagination button {
+.my-pagination button {
     width: 32px;
     height: 32px;
     font-size: 16px;
@@ -148,14 +148,14 @@ export default {
     border-radius: 4px;
     cursor: pointer;
 }
-.ellipsis {
+.my-pagination .ellipsis {
     margin-right: 16px;
 }
-.active {
+.my-pagination .active {
     background-color: #000000;
     color: #ffffff;
 }
-.disbled {
+.my-pagination .disbled {
     cursor: not-allowed;
 }
 </style>

@@ -162,7 +162,7 @@ export default {
     changePage ($event) {
       console.log('changePage',$event);      
       this.queryParams.pageNo = $event;
-      this.getSongList();
+      this.doSearch();
     }
   },
 };
