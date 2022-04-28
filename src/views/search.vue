@@ -13,7 +13,7 @@
     <section class="container">
         <nav class="breadcrumb" aria-label="breadcrumbs">
             <ul>
-                <li @click="typeClick(index)" v-for="(item, index) in searchType" :class="{'is-active':index == searchTypeIndex}" :key="index">{{item}}</li>
+                <li @click="typeClick(index)" v-for="(item, index) in searchType" :class="{'is-active':index == searchTypeIndex}" :key="index"><span>{{item}}</span></li>
             </ul>
         </nav>
         <!-- 歌曲列表 -->
