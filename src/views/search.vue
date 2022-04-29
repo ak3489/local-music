@@ -111,7 +111,6 @@ export default {
       ...mapGetters(['vuexSearchType','vuexSearchNo'])
   },
   created() {
-    console.log('this',this.vuexSearchNo);
     this.queryParams.pageNo = this.vuexSearchNo;
     this.searchTypeIndex = this.vuexSearchType;
     this.doSearch()
@@ -137,7 +136,9 @@ export default {
         this.total = data.total;
         // console.log('this.singerList',this.singerList);
     },
-    doSearch(){
+    doSearch(e){
+      //  this.queryParams.pageNo = 1;
+      if(e!='change'){this.queryParams.pageNo = 1}
         switch (this.searchTypeIndex) {
             case 0:
                 this.getSongList()
@@ -174,7 +175,7 @@ export default {
       // console.log('changePage',$event);
       this.changeSearchNo($event);
       this.queryParams.pageNo = $event;
-      this.doSearch();
+      this.doSearch('change');
     }
   },
 };
