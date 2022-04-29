@@ -65,10 +65,17 @@ export default {
           type: Number,
           default: 12
       },
+      pageNo: {
+          type: Number,
+          default: 1
+      },
       continues: {
           type: Number,
           default: 5
       }
+  },
+  created(){
+    this.currentPage = this.pageNo
   },
   computed: {
       totalPage() {

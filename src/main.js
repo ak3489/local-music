@@ -1,3 +1,6 @@
+/*
+ * @LastEditors: gcz
+ */
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
@@ -11,7 +14,7 @@ Vue.prototype.$request = request
 
 import './utils/filter'
 
-// import store from './store';
+import store from './store';
 
 import VuePlyr from 'vue-plyr'
 import 'vue-plyr/dist/vue-plyr.css'
@@ -26,7 +29,7 @@ Vue.config.productionTip = false
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  // store,
+  store,
   router,
   components: { App },
   template: '<App/>'

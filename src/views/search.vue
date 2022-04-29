@@ -52,7 +52,7 @@
         </div>
         <!-- 歌手列表 -->
         <div class="box pagination-box">
-           <pagination :continues="5" :pageSize="queryParams.pageSize" :total="total" @onChangePage="changePage($event)" />
+           <pagination ref="pagination" :continues="5" :pageNo="queryParams.pageNo" :pageSize="queryParams.pageSize" :total="total" @onChangePage="changePage($event)" />
         </div>
        
         <Empty v-if="albumList.length<=0&&songList.length<=0&&singerList.length<=0" description="没有数据" />
@@ -75,6 +75,7 @@
 <script>
 import Empty from '../components/empty';
 import Pagination from '../components/pagination'
+import {mapMutations, mapGetters} from 'vuex'
 export default {
   name: "",
   components: {
@@ -101,16 +102,22 @@ export default {
         total:125,
         queryParams: {
             pageNo: 1,
-            pageSize: 12,
+            pageSize: 8,
         },
-        currentPage:1,
     };
   },
+  computed: {
+      // 引入getters中的计算属性，需要在 computed 中引入
+      ...mapGetters(['vuexSearchType','vuexSearchNo'])
+  },
   created() {
-    this.getSongList()
-    this.currentPage = 1
+    console.log('this',this.vuexSearchNo);
+    this.queryParams.pageNo = this.vuexSearchNo;
+    this.searchTypeIndex = this.vuexSearchType;
+    this.doSearch()
   },
   methods: {
+    ...mapMutations(['changeSearchType','changeSearchNo']),
     async getAlbumList() {
         let {code,data,msg} = await this.$request.albumList({keyword:this.keyword,pageNo:this.queryParams.pageNo,pageSize:this.queryParams.pageSize});
         this.albumList = data.list;
@@ -147,7 +154,11 @@ export default {
         }
     },
     typeClick(index){
+      this.changeSearchType(index);
+      this.keyword = '';
       this.searchTypeIndex = index;
+      this.queryParams.pageNo = 1;
+      this.$refs.pagination.onChangePage(1);
       this.doSearch()
     },
     playSong(item){
@@ -160,7 +171,8 @@ export default {
       })
     },
     changePage ($event) {
-      console.log('changePage',$event);      
+      // console.log('changePage',$event);
+      this.changeSearchNo($event);
       this.queryParams.pageNo = $event;
       this.doSearch();
     }
